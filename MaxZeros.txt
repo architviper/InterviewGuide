@@ -1,0 +1,61 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class MaxZerosInArray {
+
+    public static void main(String[] args) {
+        List<Integer> arr = new ArrayList<>();
+        arr.add(0);
+        arr.add(0);
+        arr.add(0);
+        arr.add(1);
+        arr.add(0);
+        arr.add(0);
+        arr.add(0);
+        arr.add(0);
+        arr.add(0);
+        arr.add(0);
+        arr.add(1);
+        arr.add(0);
+        arr.add(0);
+        arr.add(0);
+
+
+        System.out.println(getContinousIndex(arr));
+
+
+    }
+
+    public static List<Integer>  getContinousIndex (List<Integer> arr) {
+       int maxAnswer = 0;
+       int count = 0;
+       List<Integer> ans  =  new ArrayList<>();
+       int start= 0;
+       int end  = 0;
+       for(int i = 0, j = 0 ; i < arr.size() && j < arr.size(); ){
+
+           if(arr.get(j) != 0) {
+              i = j+1;
+              j++;
+              count =0;
+              continue;
+           }
+           if(arr.get(j) == 0) {
+               count++;
+
+               if(maxAnswer < count) {
+                   maxAnswer = count;
+                start = i;
+                end = j;
+               }
+               j++;
+           }
+
+       }
+
+      ans.add(start);
+      ans.add(end);
+
+      return ans;
+    }
+}
