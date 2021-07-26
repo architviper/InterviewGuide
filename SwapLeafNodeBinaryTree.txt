@@ -1,0 +1,97 @@
+
+class Node {
+
+    int key;
+    Node left;
+    Node right;
+
+    Node (int k) {
+        key = k;
+        left = null;
+        right = null;
+    }
+}
+
+public class SwapLeafNodeBinaryTree {
+   static  Node p1,p2;
+   static int count ;
+    public static void main(String[] args) {
+
+
+        Node root  = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+
+        root.left.left = new Node(4);
+        root.right.left = new Node(5);
+        root.right.right = new Node(8);
+
+        root.right.left.left = new Node(6);
+        root.right.left.right = new Node(7);
+
+        root.right.right.left = new Node(9);
+
+        root.right.right.right = new Node(10);
+
+        InOrderTrav(root);
+
+        System.out.println();
+        pairWiseLeafSwap(root);
+
+        InOrderTrav(root);
+
+    }
+
+    private static void pairWiseLeafSwap(Node root) {
+
+        if(root == null ) return;
+
+        if (root.left == null && root.right ==null)  {
+             p2 = root;
+            count++;
+
+
+            if(count % 2 == 0 ) {
+                SwappingNodeValue(p1,p2);
+            } else {
+                p1 = root;
+            }
+
+
+        } else {
+           // if(root.left != null) {
+                pairWiseLeafSwap(root.left);
+           // }
+           // if(root.right != null) {
+                pairWiseLeafSwap(root.right);
+           // }
+        }
+
+
+
+    }
+
+    private static void SwappingNodeValue(Node p1, Node p2){
+        int temp = p1.key;
+        p1.key = p2.key;
+        p2.key = temp;
+    }
+
+    private static void InOrderTrav(Node root) {
+
+        if(root == null) return;
+
+
+        InOrderTrav(root.left);
+
+
+
+        System.out.print(root.key);
+
+
+        InOrderTrav(root.right);
+
+
+
+    }
+}
